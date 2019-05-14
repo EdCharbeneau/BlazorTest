@@ -1,0 +1,28 @@
+﻿@page "/"
+@using BlazorTest.Components
+@inject IJSRuntime JSRuntime
+
+<h1>Hello, world!</h1>
+
+<ModalDialog Id="example-modal" HeaderText="abc">
+    <DialogBody>
+        First name:
+        <EditForm Model="@firstName">
+            <MyInput Autofocus="true" bind-Value="@firstName" Placeholder="First name" />
+        </EditForm>
+    </DialogBody>
+</ModalDialog>
+
+<button type="button" onclick="@ShowModalDialog" class="btn btn-primary">
+    Show modal dialog
+</button>
+
+@functions
+{
+    private string firstName = string.Empty;
+
+    private void ShowModalDialog()
+    {
+        JSInterop.ShowModalDialog(JSRuntime, "example-modal");
+    }
+}

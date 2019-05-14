@@ -1,0 +1,19 @@
+﻿@inherits InputBase<string>
+
+<div class="my-input">
+    <input bind-value-oninput="@CurrentValue" placeholder="@Placeholder" autofocus=@Autofocus />
+</div>
+
+@functions
+{
+    [Parameter] private bool Autofocus { get; set; }
+
+    [Parameter] private string Placeholder { get; set; }
+
+    protected override bool TryParseValueFromString(string value, out string result, out string validationErrorMessage)
+    {
+        result = value;
+        validationErrorMessage = null;
+        return true;
+    }
+}
