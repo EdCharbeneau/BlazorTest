@@ -7,8 +7,10 @@
 <ModalDialog Id="example-modal" HeaderText="abc">
     <DialogBody>
         First name:
-        <EditForm Model="@firstName">
-            <MyInput Autofocus="true" bind-Value="@firstName" Placeholder="First name" />
+        <EditForm Model="@myForm">
+            <MyInput Autofocus="true" bind-Value="@myForm.FirstName" Placeholder="First name" />
+            <ValidationSummary />
+            <DataAnnotationsValidator />
         </EditForm>
     </DialogBody>
 </ModalDialog>
@@ -19,10 +21,17 @@
 
 @functions
 {
-    private string firstName = string.Empty;
+
+    FormData myForm = new FormData();
 
     private void ShowModalDialog()
     {
         JSInterop.ShowModalDialog(JSRuntime, "example-modal");
+    }
+
+    protected class FormData
+    {
+        [System.ComponentModel.DataAnnotations.Required]
+        public string FirstName { get; set; } = String.Empty;
     }
 }
